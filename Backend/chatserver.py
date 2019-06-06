@@ -42,6 +42,18 @@ class UserManager:
 
 
 
+	def removeUser(self, username):
+		if username not in self.users:
+			return
+
+			lock.acquire()
+			del self.users[username]
+			lock.release()
+
+			self.sendMessageToAll('[%s]님이 퇴장했습니다.' %username)
+			print('--- 대화 참여자 수 [%d]' %len(self.users))
+
+
 	def messageHandler(self, username, msg):
 
 		if msg[0] != '/':
@@ -50,7 +62,6 @@ class UserManager:
 
 		if msg.strip() == '/quit':
 			self.removeUser(username)
-
 			return -1
 
 	def sendMessageToAll(self, msg):
@@ -62,8 +73,6 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 
 	def handle(self):
 		print('[%s] 연결됨' %self.client_address[0])
-
-
 		try:
 			username = self.registerUsername()
 			msg = self.request.recv(1024)
@@ -81,8 +90,13 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 		except Exception as e:
 			print(e)
 
+
 		print('[%s] 접속종료' %self.client_address[0])
 		self.userman.removeUser(username)
+
+			print('[%s] 접속종료' %self.client_address[0])
+			self.userman.removeUser(username)
+
 
 	def registerUsername(self):
 		while True:
@@ -112,10 +126,11 @@ def runServer():
 
 
 
+
+
 def create_db():
 
     file_name = '../Data/chat_log.db'
-
 
     conn = sqlite3.connect(file_name)
     cur = conn.cursor()
@@ -138,7 +153,10 @@ def add_chat(userid, message):
 
 
 
+
+
 def list_chat(ts = None):
+
 
     log = []
     conn = sqlite3.connect('../Data/chat_log.db')
@@ -161,4 +179,5 @@ def list_chat(ts = None):
 
 runServer()
 
-		
+
+
