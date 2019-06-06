@@ -8,6 +8,8 @@ from datetime import datetime
 HOST = ''
 PORT = 9009
 lock = threading.Lock()
+chatfile = '../Data/chat_log.db'
+userfile = '../Data/user.db'
 
 
 class UserManager:
@@ -18,7 +20,6 @@ class UserManager:
       if username in self.users:
          conn.send('이미 등록된 사용자입니다.\n'.encode())
          return None
-
 
       lock.acquire()
       self.users[username] = (conn, addr)
@@ -88,8 +89,9 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
    def registerUsername(self):
       while True:
          self.request.send('로그인ID:'.encode())
-         username = self.request.recv(1024)
-         username = username.decode().strip()
+         id = self.request.recv(1024)
+         id = id.decode().strip()
+
          if self.userman.addUser(username, self.request, self.client_address):
             return username
 
@@ -109,20 +111,13 @@ def runServer():
       server.server_close()
 
 
-
-
-
-
-
 def create_db():
 
-    file_name = '../Data/chat_log.db'
 
-    conn = sqlite3.connect(file_name)
+    conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
-    table_create_sql = """CREATE TABLE IF NOT EXISTS chat(
-    id integer primary key autoincrement,
-    userid VARCHAR(32) not null,
+    table_create_sql = """CREATE TABLE IF NOT EXISTS chat_log(
+    nickname VARCHAR(32) not null,
     message text not null,
     ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"""
 
@@ -130,33 +125,26 @@ def create_db():
 
 
 def add_chat(userid, message):
-    conn = sqlite3.connect('../Data/chat_log.db')
+    conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
 
-    chat = "INSERT INTO chat(userid, message, ts) values (?, ?, CURRENT_TIMESTAMP)"
+    chat = "INSERT INTO chat_log(nickname, message, ts) values (?, ?, CURRENT_TIMESTAMP)"
     cur.execute(chat, (userid, message))
     conn.commit()
-
-
-
-
-
-
-
 
 
 def list_chat(ts = None):
 
 
     log = []
-    conn = sqlite3.connect('../Data/chat_log.db')
+    conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
 
     if ts != None:
-        sql = "select * from chat where chat.ts >= ?"
+        sql = "select * from chat_log where chat_log.ts >= ?"
         cur.execute(sql, (ts,))
     else:
-        sql = "select * from chat where 1"
+        sql = "select * from chat_log where 1"
         cur.execute(sql)
 
     rows = cur.fetchall()
@@ -165,6 +153,49 @@ def list_chat(ts = None):
 
     return log
 
+def create_user_db():
+
+    conn = sqlite3.connect(userfile)
+    cur = conn.cursor()
+    table_create_sql = """CREATE TABLE IF NOT EXISTS user(
+    id VARCHAR(32) not null,
+    nick VARCHAR(32) not null default 익명,
+    password text not null);"""
+
+    cur.execute(table_create_sql)
+    conn.commit()
+
+def resister(id, nick, pw):
+    conn = sqlite3.connect(userfile)
+    cur = conn.cursor()
+
+    while searchid(id):
+        id = input("중복된 id 입니다. 새로운 id를 입력해주세요.:")
+
+    sql = "INSERT INTO user(id, nick ,password) values (?, ?, ?)"
+    cur.execute(sql, (id, nick, pw))
+    conn.commit()
+
+def searchid(id):
+
+    conn = sqlite3.connect(userfile)
+    cur = conn.cursor()
+    sql = "SELECT * from user where id == ?"
+
+    cur.execute(sql, (id,))
+    rows = cur.fetchall()
+
+    return len(rows)>0
+
+def searchpw(id, pw):
+
+    conn = sqlite3.connect(userfile)
+    cur = conn.cursor()
+    sql = "SELECT password from user where id == ?"
+
+    cur.execute(sql, (id,))
+    info = cur.fetchall()
+
+    return pw == info[0][0]
 
 
-runServer()
