@@ -171,16 +171,7 @@ def runServer():
 <<<<<<< HEAD
 
 =======
-def chating():
-	MyTcpHandler.handle()
-	while True:
-		msg = input()
-		if msg == '/quit':
-			socketserver.send(msg.encode())
-			break
-		socketserver.send(msg.encode())
->>>>>>> master
->>>>>>> master
+
 
 
 
