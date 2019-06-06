@@ -2,7 +2,6 @@ import socket
 from threading import Thread
 
 
-HOST = '127.0.0.1'
 PORT = 9009
 
 
@@ -19,7 +18,7 @@ def rcvMsg(sock):
 
 def runChat():
 	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-		sock.connect((HOST, PORT))
+		sock.connect((input("채팅방 주소를 입력해주세요.:"), PORT))
 		t = Thread(target=rcvMsg, args=(sock,))
 		t.daemon = True
 		t.start()
