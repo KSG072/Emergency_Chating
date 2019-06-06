@@ -29,6 +29,20 @@ class UserManager:
 
 		return username
 
+<<<<<<< HEAD
+	def removeUser(self, username): 
+		if username not in self.users:
+			return
+
+		lock.acquire()
+		del self.users[username]
+		lock.release()
+
+		self.sendMessageToAll('[%s]님이 퇴장했습니다.' % username)
+		print('--- 대화 참여자 수 [%d]' % len(self.users))
+
+
+=======
 	def removeUser(self, username):
 		if username not in self.users:
 			return
@@ -39,6 +53,7 @@ class UserManager:
 
 			self.sendMessageToAll('[%s]님이 퇴장했습니다.' %username)
 			print('--- 대화 참여자 수 [%d]' %len(self.users))
+>>>>>>> master
 
 	def messageHandler(self, username, msg):
 
@@ -48,6 +63,10 @@ class UserManager:
 
 		if msg.strip() == '/quit':
 			self.removeUser(username)
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 			return -1
 
 	def sendMessageToAll(self, msg):
@@ -70,14 +89,24 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 				print(datetime.now())
 				if self.userman.messageHandler(username, msg.decode()) == -1:
 					self.request.close()
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 					break
 				msg = self.request.recv(1024)
 
 
 		except Exception as e:
 			print(e)
+<<<<<<< HEAD
+
+		print('[%s] 접속종료' %self.client_address[0])
+		self.userman.removeUser(username)
+=======
 			print('[%s] 접속종료' %self.client_address[0])
 			self.userman.removeUser(username)
+>>>>>>> master
 
 	def registerUsername(self):
 		while True:
@@ -102,6 +131,9 @@ def runServer():
 		server.shutdown()
 		server.server_close()
 
+<<<<<<< HEAD
+
+=======
 def chating():
 	MyTcpHandler.handle()
 	while True:
@@ -110,13 +142,18 @@ def chating():
 			socketserver.send(msg.encode())
 			break
 		socketserver.send(msg.encode())
+>>>>>>> master
 
 
 
 
 def create_db():
+<<<<<<< HEAD
+
+=======
 	# 이후 코드를 채우세요.
     # 이전 숙제를 참고하세요.
+>>>>>>> master
     file_name = '../Data/chat_log.db'
 
 
@@ -139,9 +176,15 @@ def add_chat(userid, message):
     cur.execute(chat, (userid, message))
     conn.commit()
 
+<<<<<<< HEAD
+
+
+def list_chat(ts = None):
+=======
 # 상황에 따라 함수를 부르는 코드를 채우세요.
 
 def list_chat(ts = None): # 이후 코드를 채우세요.
+>>>>>>> master
 
     log = []
     conn = sqlite3.connect('../Data/chat_log.db')
@@ -163,5 +206,9 @@ def list_chat(ts = None): # 이후 코드를 채우세요.
 
 
 runServer()
+<<<<<<< HEAD
+
+=======
 # chating()
+>>>>>>> master
 		
