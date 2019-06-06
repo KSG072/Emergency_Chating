@@ -29,10 +29,6 @@ class UserManager:
 
 		return username
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 	def removeUser(self, username): 
 		if username not in self.users:
 			return
@@ -44,12 +40,6 @@ class UserManager:
 		self.sendMessageToAll('[%s]님이 퇴장했습니다.' % username)
 		print('--- 대화 참여자 수 [%d]' % len(self.users))
 
-
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> master
 	def removeUser(self, username):
 		if username not in self.users:
 			return
@@ -60,11 +50,7 @@ class UserManager:
 
 			self.sendMessageToAll('[%s]님이 퇴장했습니다.' %username)
 			print('--- 대화 참여자 수 [%d]' %len(self.users))
-<<<<<<< HEAD
 
-=======
->>>>>>> master
->>>>>>> master
 
 	def messageHandler(self, username, msg):
 
@@ -74,13 +60,6 @@ class UserManager:
 
 		if msg.strip() == '/quit':
 			self.removeUser(username)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> master
->>>>>>> master
 			return -1
 
 	def sendMessageToAll(self, msg):
@@ -92,11 +71,7 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 
 	def handle(self):
 		print('[%s] 연결됨' %self.client_address[0])
-<<<<<<< HEAD
-=======
 
-
->>>>>>> master
 		try:
 			username = self.registerUsername()
 			msg = self.request.recv(1024)
@@ -106,21 +81,14 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 				print(datetime.now())
 				if self.userman.messageHandler(username, msg.decode()) == -1:
 					self.request.close()
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> master
->>>>>>> master
 					break
 				msg = self.request.recv(1024)
 
 
 		except Exception as e:
 			print(e)
-<<<<<<< HEAD
+
 
 
 		print('[%s] 접속종료' %self.client_address[0])
@@ -129,16 +97,13 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 			print('[%s] 접속종료' %self.client_address[0])
 			self.userman.removeUser(username)
 
-=======
-<<<<<<< HEAD
 
 		print('[%s] 접속종료' %self.client_address[0])
 		self.userman.removeUser(username)
-=======
+
 			print('[%s] 접속종료' %self.client_address[0])
 			self.userman.removeUser(username)
->>>>>>> master
->>>>>>> master
+
 
 	def registerUsername(self):
 		while True:
@@ -163,35 +128,22 @@ def runServer():
 		server.shutdown()
 		server.server_close()
 
-<<<<<<< HEAD
 
-
-
-=======
-<<<<<<< HEAD
-
-=======
 
 
 
 
 
 def create_db():
-<<<<<<< HEAD
+
 
     file_name = '../Data/chat_log.db'
 
-=======
-<<<<<<< HEAD
 
-=======
-	# 이후 코드를 채우세요.
-    # 이전 숙제를 참고하세요.
->>>>>>> master
     file_name = '../Data/chat_log.db'
 
 
->>>>>>> master
+
     conn = sqlite3.connect(file_name)
     cur = conn.cursor()
     table_create_sql = """CREATE TABLE IF NOT EXISTS chat(
@@ -211,24 +163,16 @@ def add_chat(userid, message):
     cur.execute(chat, (userid, message))
     conn.commit()
 
-<<<<<<< HEAD
+
+
+
+
 
 
 
 
 def list_chat(ts = None):
 
-=======
-<<<<<<< HEAD
-
-
-def list_chat(ts = None):
-=======
-# 상황에 따라 함수를 부르는 코드를 채우세요.
-
-def list_chat(ts = None): # 이후 코드를 채우세요.
->>>>>>> master
->>>>>>> master
 
     log = []
     conn = sqlite3.connect('../Data/chat_log.db')
@@ -250,15 +194,3 @@ def list_chat(ts = None): # 이후 코드를 채우세요.
 
 
 runServer()
-<<<<<<< HEAD
-
-
-
-=======
-<<<<<<< HEAD
-
-=======
-# chating()
->>>>>>> master
-		
->>>>>>> master
