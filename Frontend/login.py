@@ -58,6 +58,11 @@ class Ui_Dialog(QtWidgets.QDialog):
 
         #로그인 버튼 일어나면 생기는 일
         self.LG_Button.clicked.connect(self.LGMessageBox)
+        self.Sign_UP_Button.clicked.connect(self.SUMessageBox)
+
+    def SUMessageBox(self):
+        msgbox = QtWidgets.QMessageBox(self)
+        subprocess.Popen(['python3', 'sign_up.py'], cwd = os.path.dirname(os.path.realpath(__file__)))
 
     def LGMessageBox(self):
         msgbox = QtWidgets.QMessageBox(self)
