@@ -89,8 +89,8 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
    def registerUsername(self):
       while True:
          self.request.send('로그인ID:'.encode())
-         id = self.request.recv(1024)
-         id = id.decode().strip()
+         username = self.request.recv(1024)
+         username = id.decode().strip()
 
          if self.userman.addUser(username, self.request, self.client_address):
             return username
@@ -159,7 +159,7 @@ def create_user_db():
     cur = conn.cursor()
     table_create_sql = """CREATE TABLE IF NOT EXISTS user(
     id VARCHAR(32) not null,
-    nick VARCHAR(32) not null default 익명,
+    nick VARCHAR(32) not null default '익명',
     password text not null);"""
 
     cur.execute(table_create_sql)
@@ -198,4 +198,15 @@ def searchpw(id, pw):
 
     return pw == info[0][0]
 
+def searchnick(nick):
 
+    if nick == "": return False
+
+    conn = sqlite3.connect(userfile)
+    cur = conn.cursor()
+    sql = "SELECT nick from user where 1"
+
+    cur.execute(sql)
+    info = cur.fetchall()
+
+    return (nick,) in info

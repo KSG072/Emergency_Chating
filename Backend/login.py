@@ -18,7 +18,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import subprocess
 import os
-from Backend import chatserver
+import platform
+if platform.system() == 'Windows':
+    import chatserver
+else:
+    from Backend import chatserver
+
+
 
 class Ui_Dialog(QtWidgets.QDialog):
     def setupUi(self, Dialog):
@@ -50,7 +56,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.Password.setDragEnabled(True)
         self.Password.setClearButtonEnabled(True)
         self.Password.setObjectName("Password")
-        #로그인 버xms
+        #로그인 버튼
         self.LG_Button = QtWidgets.QPushButton(Dialog)
         self.LG_Button.setGeometry(QtCore.QRect(240, 540, 110, 32))
         self.LG_Button.setObjectName("LG_Button")
@@ -63,18 +69,22 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def SUMessageBox(self):
         msgbox = QtWidgets.QMessageBox(self)
-        subprocess.Popen(['python3', 'sign_up.py'], cwd =os.path.dirname(os.path.realpath(__file__)))
+        if platform.system() == 'Windows':
+            subprocess.run(['sign_up.py'], shell = True)
+        else:
+            subprocess.Popen(['python3', 'sign_up.py'], cwd =os.path.dirname(os.path.realpath(__file__)))
+
     def LGMessageBox(self):
         msgbox = QtWidgets.QMessageBox(self)
         if chatserver.searchid(self.ID.text()): #1234가 아닌 DB 안에 존재하는 ID 와 검사
             if chatserver.searchpw(self.ID.text(),self.Password.text()): #1234가 아닌 DB 안에 존재하는 Password 와 검사
-                msgbox.information(self, 'MessageBox title', '로그인이 되었습니다.', QtWidgets.QMessageBox.Yes)
+                msgbox.information(self, '알림', '로그인이 되었습니다.', QtWidgets.QMessageBox.Yes)
                 subprocess.Popen(['python3', 'chat.py'], cwd =os.path.dirname(os.path.realpath(__file__)))
                 sys.exit()
             else:
-                msgbox.information(self, 'MessageBox title', '비밀번호가 틀렸습니다.', QtWidgets.QMessageBox.Yes)
+                msgbox.information(self, '알림', '비밀번호가 틀렸습니다.', QtWidgets.QMessageBox.Yes)
         else:
-            msgbox.information(self, 'MessageBox title', '없는 아이디 입니다.', QtWidgets.QMessageBox.Yes)
+            msgbox.information(self, '알림', '없는 아이디 입니다.', QtWidgets.QMessageBox.Yes)
 
 
     def retranslateUi(self, Dialog):
