@@ -9,9 +9,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import platform
 if platform.system() == 'Windows':
-    import chatserver
+    import database
 else:
-    from Backend import chatserver
+    from Backend import database
 
 
 class Ui_MainWindow(QtWidgets.QDialog):
@@ -83,13 +83,13 @@ class Ui_MainWindow(QtWidgets.QDialog):
         msgbox = QtWidgets.QMessageBox(self)
         id, pw, nick = self.ID.text(), self.Password.text(), self.Nickname.text()
 
-        if chatserver.searchid(id):
+        if database.searchid(id):
             msgbox.information(self, '알림', '중복된 아이디 입니다.', QtWidgets.QMessageBox.Yes)
-        elif chatserver.searchnick(nick):
+        elif database.searchnick(nick):
             msgbox.information(self, '알림', '중복된 닉네임 입니다.', QtWidgets.QMessageBox.Yes)
         else:
             msgbox.information(self, '알림', '회원가입이 완료 되었습니다.', QtWidgets.QMessageBox.Yes)
-            chatserver.resister(id, nick, pw)
+            database.resister(id, nick, pw)
             sys.exit()
 
 

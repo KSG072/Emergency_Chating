@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 import socketserver
 import threading
-import sqlite3
-import os
-from datetime import datetime
+import Backend.database
 
 HOST = ''
 PORT = 9009
 lock = threading.Lock()
-chatfile = '../Data/chat_log.db'
-userfile = '../Data/user.db'
 
 
 class UserManager:
    def __init__(self):
       self.users = {}
 
-   def addUser(self, username, conn, addr):
+   def addUser(self, username, conn, addr):#이미 gui에서 구현한 기능.. 필요한가..?
       if username in self.users:
          conn.send('이미 등록된 사용자입니다.\n'.encode())
          return None
@@ -25,7 +21,7 @@ class UserManager:
       self.users[username] = (conn, addr)
       lock.release()
 
-      self.sendMessageToAll('[%s]님이 입장했습니다.' %username)
+      self.sendMessageToAll('[%s]님이 입장했습니다.' %username)#이거는 어떻게 채팅방에 나오게 할까.. 관리자이름으로 db에 저장해서 출력할까
       print('+++ 대화 참여자 수 [%d]' %len(self.users))
 
       return username
@@ -38,11 +34,11 @@ class UserManager:
       del self.users[username]
       lock.release()
 
-      self.sendMessageToAll('[%s]님이 퇴장했습니다.' % username)
+      self.sendMessageToAll('[%s]님이 퇴장했습니다.' % username)#24번과 같은 방식으로 할 수 있으려나..
       print('--- 대화 참여자 수 [%d]' % len(self.users))
 
 
-   def messageHandler(self, username, msg):
+   def messageHandler(self, username, msg):#이제 나가기 버튼이 있는데 필요한 건가..
 
       if msg[0] != '/':
          self.sendMessageToAll('[%s] %s' %(username, msg))
@@ -63,34 +59,28 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
       print('[%s] 연결됨' %self.client_address[0])
 
       try:
-         username = self.registerUsername()
+         username = ''#로그인할때 id의 닉네임을 불러와야함
          msg = self.request.recv(1024)
          while msg:
-            add_chat(username, msg.decode())
+            Backend.database.add_chat(username, msg.decode())
             print(username, " : ", msg.decode())
-            print(datetime.now())
             if self.userman.messageHandler(username, msg.decode()) == -1:
                self.request.close()
 
                break
             msg = self.request.recv(1024)
-
-
       except Exception as e:
-         print(e)
+          print(e)
+          print('[%s] 접속종료' %self.client_address[0])
+          self.userman.removeUser(username)
 
 
 
-      print('[%s] 접속종료' %self.client_address[0])
-      self.userman.removeUser(username)
-
-
-
-   def registerUsername(self):
+   def registerUsername(self):#이젠 필요 없지 않을까..
       while True:
          self.request.send('로그인ID:'.encode())
          username = self.request.recv(1024)
-         username = id.decode().strip()
+         username = username.decode().strip()
 
          if self.userman.addUser(username, self.request, self.client_address):
             return username
@@ -102,111 +92,10 @@ class ChatingServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 def runServer():
    print('start')
-   create_db()
+   Backend.database.create_db()
    try:
       server = ChatingServer((HOST, PORT), MyTcpHandler)
       server.serve_forever()
    except KeyboardInterrupt:
       server.shutdown()
       server.server_close()
-
-
-def create_db():
-
-
-    conn = sqlite3.connect(chatfile)
-    cur = conn.cursor()
-    table_create_sql = """CREATE TABLE IF NOT EXISTS chat_log(
-    nickname VARCHAR(32) not null,
-    message text not null,
-    ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"""
-
-    cur.execute(table_create_sql)
-
-
-def add_chat(userid, message):
-    conn = sqlite3.connect(chatfile)
-    cur = conn.cursor()
-
-    chat = "INSERT INTO chat_log(nickname, message, ts) values (?, ?, CURRENT_TIMESTAMP)"
-    cur.execute(chat, (userid, message))
-    conn.commit()
-
-
-def list_chat(ts = None):
-
-
-    log = []
-    conn = sqlite3.connect(chatfile)
-    cur = conn.cursor()
-
-    if ts != None:
-        sql = "select * from chat_log where chat_log.ts >= ?"
-        cur.execute(sql, (ts,))
-    else:
-        sql = "select * from chat_log where 1"
-        cur.execute(sql)
-
-    rows = cur.fetchall()
-    for row in rows:
-        log.append(row)
-
-    return log
-
-def create_user_db():
-
-    conn = sqlite3.connect(userfile)
-    cur = conn.cursor()
-    table_create_sql = """CREATE TABLE IF NOT EXISTS user(
-    id VARCHAR(32) not null,
-    nick VARCHAR(32) not null default '익명',
-    password text not null);"""
-
-    cur.execute(table_create_sql)
-    conn.commit()
-
-def resister(id, nick, pw):
-    conn = sqlite3.connect(userfile)
-    cur = conn.cursor()
-
-    while searchid(id):
-        id = input("중복된 id 입니다. 새로운 id를 입력해주세요.:")
-
-    sql = "INSERT INTO user(id, nick ,password) values (?, ?, ?)"
-    cur.execute(sql, (id, nick, pw))
-    conn.commit()
-
-def searchid(id):
-
-    conn = sqlite3.connect(userfile)
-    cur = conn.cursor()
-    sql = "SELECT * from user where id == ?"
-
-    cur.execute(sql, (id,))
-    rows = cur.fetchall()
-
-    return len(rows)>0
-
-def searchpw(id, pw):
-
-    conn = sqlite3.connect(userfile)
-    cur = conn.cursor()
-    sql = "SELECT password from user where id == ?"
-
-    cur.execute(sql, (id,))
-    info = cur.fetchall()
-
-    return pw == info[0][0]
-
-def searchnick(nick):
-
-    if nick == "": return False
-
-    conn = sqlite3.connect(userfile)
-    cur = conn.cursor()
-    sql = "SELECT nick from user where 1"
-
-    cur.execute(sql)
-    info = cur.fetchall()
-
-    return (nick,) in info

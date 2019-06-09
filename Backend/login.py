@@ -20,11 +20,11 @@ import subprocess
 import os
 import platform
 if platform.system() == 'Windows':
-    import chatserver
+    import database
 else:
-    from Backend import chatserver
+    from Backend import database
 
-
+Nick =''
 
 class Ui_Dialog(QtWidgets.QDialog):
     def setupUi(self, Dialog):
@@ -76,9 +76,10 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def LGMessageBox(self):
         msgbox = QtWidgets.QMessageBox(self)
-        if chatserver.searchid(self.ID.text()): #1234가 아닌 DB 안에 존재하는 ID 와 검사
-            if chatserver.searchpw(self.ID.text(),self.Password.text()): #1234가 아닌 DB 안에 존재하는 Password 와 검사
+        if database.searchid(self.ID.text()): #1234가 아닌 DB 안에 존재하는 ID 와 검사
+            if database.searchpw(self.ID.text(),self.Password.text()): #1234가 아닌 DB 안에 존재하는 Password 와 검사
                 msgbox.information(self, '알림', '로그인이 되었습니다.', QtWidgets.QMessageBox.Yes)
+                Nick = database.nick(self.ID.text())
                 subprocess.Popen(['python3', 'chat.py'], cwd =os.path.dirname(os.path.realpath(__file__)))
                 sys.exit()
             else:
@@ -95,13 +96,9 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.N_Password.setText(_translate("Dialog", "Password : "))
         self.LG_Button.setText(_translate("Dialog", "로그인"))
 
-
-
-
-
 if __name__ == "__main__":
     import sys
-    chatserver.create_user_db()
+    database.create_user_db()
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
