@@ -12,13 +12,6 @@ from threading import Thread
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-
-
-
-
-
-
-
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
@@ -28,7 +21,7 @@ def rcvMsg(sock):
             data = sock.recv(1024)
             if not data:
                 break
-            print(data.decode())
+            Ui_MainWindow.receive_text(data)
 
         except:
             pass
@@ -36,25 +29,25 @@ def rcvMsg(sock):
 def check(HOST):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 
-        sock.settimeout(1)
-        try: sock.connect((HOST, 9009))
+        sock.connect((HOST, 9009))
+        try: sock.close()
         except Exception as e:
             return False
         return True
 
-
-
 def seder(sock, text1):
     sock.send(text1.encode())
 
-
-
+def runChat():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.connect((host, 9009))
+        t = Thread(target=rcvMsg, args=(sock,))
+        t.daemon = True
+        t.start()
 
 
 
 class Ui_MainWindow(QtWidgets.QDialog):
-
-
 
     def setupUi(self, MainWindow):
 
@@ -90,12 +83,17 @@ class Ui_MainWindow(QtWidgets.QDialog):
         self.send_button.setText(_translate("MainWindow", "전송"))
 
     def send_text(self):
-
-
         text = self.send.toPlainText()  # 입력받은 텍스트
         self.chating.append("NickName" + " : " + text)  # DB에서 추출해서 할까..
         seder(sock, text)
+
+        text = self.send.toPlainText() #입력받은 텍스트
+        self.chating.append("NickName" + " : " + text)   #DB에서 추출해서 할까..
+        socket.socket.send(text.encode())
         self.send.clear()
+
+    def receive_text(self,text):
+        self.chating.append("other" + " : " + text)
 
 
 

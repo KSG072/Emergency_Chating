@@ -15,12 +15,15 @@ import platform
 
 
 
+import Backend.login
+
 def check(HOST):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 
-        sock.settimeout(1)
+        sock.settimeout(3)
         try: sock.connect((HOST, 9009))
         except Exception as e:
+            print(e)
             return False
         return True
 
@@ -71,6 +74,10 @@ class Ui_MainWindow(QtWidgets.QDialog):
         if not check(ip):
             msgbox.information(self, "알림", "맞지 않는 주소입니다.", QtWidgets.QMessageBox.Yes)
         else:
+<<<<<<< refs/remotes/origin/master
+=======
+            Backend.login.host = ip
+>>>>>>> 조금수정
             msgbox.information(self, "알림", "접속 성공", QtWidgets.QMessageBox.Yes)
 
             if platform.system() == 'Windows':
