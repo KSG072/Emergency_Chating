@@ -76,14 +76,8 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
 
 
 
-   def registerUsername(self):#이젠 필요 없지 않을까..
-      while True:
-         self.request.send('로그인ID:'.encode())
-         username = self.request.recv(1024)
-         username = username.decode().strip()
+# self.userman.addUser(username, self.request, self.client_address):
 
-         if self.userman.addUser(username, self.request, self.client_address):
-            return username
 
 
 class ChatingServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
@@ -96,6 +90,9 @@ def runServer():
    try:
       server = ChatingServer((HOST, PORT), MyTcpHandler)
       server.serve_forever()
+      server.server_bind()
    except KeyboardInterrupt:
       server.shutdown()
       server.server_close()
+
+runServer()

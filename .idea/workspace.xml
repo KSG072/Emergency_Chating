@@ -6,10 +6,7 @@
       <change beforePath="$PROJECT_DIR$/Backend/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/chatclient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chatclient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/chatserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/chatserver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/sign_up.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/sign_up.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/chat_log.db" beforeDir="false" afterPath="$PROJECT_DIR$/Data/chat_log.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/Data/user.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/ip.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/chatserver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+            <state relative-caret-position="144">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
               </folding>
@@ -76,11 +73,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/chatclient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="38" column="57" selection-start-line="38" selection-start-column="57" selection-end-line="38" selection-end-column="57" />
+            <state relative-caret-position="504">
+              <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1560090436573" expanded="true" signature="317:533" ph="..." />
+                <marker date="1560149871650" expanded="true" signature="317:533" ph="..." />
               </folding>
             </state>
           </provider>
@@ -89,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/login.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-725">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            <state relative-caret-position="1800">
+              <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
               <folding>
                 <element signature="e#406#448#0" expanded="true" />
               </folding>
@@ -101,8 +98,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/sign_up.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12">
-              <caret line="92" column="22" lean-forward="true" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+            <state relative-caret-position="169">
+              <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+              <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+              <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding>
                 <element signature="e#196#238#0" expanded="true" />
               </folding>
@@ -113,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/chat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1548">
-              <caret line="86" column="72" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
+            <state relative-caret-position="378">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#193#206#0" expanded="true" />
               </folding>
@@ -125,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1728">
-              <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+            <state relative-caret-position="756">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <marker date="1560088480623" expanded="true" signature="1062:1063" ph="..." />
@@ -135,25 +136,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Backend/ip.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6">
-              <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+            <state relative-caret-position="289">
+              <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
               <folding>
                 <element signature="e#190#203#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Backend/ServerSwitch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1956">
-              <caret line="167" selection-start-line="167" selection-end-line="172" selection-end-column="17" />
-              <folding>
-                <element signature="e#24#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,14 +170,14 @@
       <list>
         <option value="$PROJECT_DIR$/Frontend/login.py" />
         <option value="$PROJECT_DIR$/Frontend/sign_up.py" />
-        <option value="$PROJECT_DIR$/Backend/sign_up.py" />
         <option value="$PROJECT_DIR$/Backend/ServerSwitch.py" />
         <option value="$PROJECT_DIR$/Backend/database.py" />
         <option value="$PROJECT_DIR$/Backend/login.py" />
-        <option value="$PROJECT_DIR$/Backend/ip.py" />
-        <option value="$PROJECT_DIR$/Backend/chatclient.py" />
+        <option value="$PROJECT_DIR$/Backend/sign_up.py" />
         <option value="$PROJECT_DIR$/Backend/chat.py" />
         <option value="$PROJECT_DIR$/Backend/chatserver.py" />
+        <option value="$PROJECT_DIR$/Backend/chatclient.py" />
+        <option value="$PROJECT_DIR$/Backend/ip.py" />
       </list>
     </option>
   </component>
@@ -256,7 +245,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.chat (1)">
+  <component name="RunManager" selected="Python.ip">
     <configuration name="ServerSwitch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Emergency_Chating" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -414,11 +403,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.chat (1)" />
         <item itemvalue="Python.ip" />
+        <item itemvalue="Python.chatserver" />
+        <item itemvalue="Python.chat (1)" />
         <item itemvalue="Python.ServerSwitch" />
         <item itemvalue="Python.chatclient" />
-        <item itemvalue="Python.chatserver" />
       </list>
     </recent_temporary>
   </component>
@@ -444,7 +433,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32289156" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -489,61 +478,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/chatserver.py">
+    <entry file="file://$PROJECT_DIR$/Backend/ServerSwitch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
-          <folding>
-            <element signature="e#24#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/chatclient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="57" selection-start-line="38" selection-start-column="57" selection-end-line="38" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1560090436573" expanded="true" signature="317:533" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-725">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-          <folding>
-            <element signature="e#406#448#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1956">
+          <caret line="167" selection-start-line="167" selection-end-line="172" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Backend/sign_up.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="92" column="22" lean-forward="true" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+        <state relative-caret-position="169">
+          <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding>
             <element signature="e#196#238#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/chat.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1548">
-          <caret line="86" column="72" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
-          <folding>
-            <element signature="e#193#206#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Backend/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1728">
-          <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+        <state relative-caret-position="756">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <marker date="1560088480623" expanded="true" signature="1062:1063" ph="..." />
@@ -551,22 +510,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/ip.py">
+    <entry file="file://$PROJECT_DIR$/Backend/chat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
-          <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+        <state relative-caret-position="378">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
-            <element signature="e#190#203#0" expanded="true" />
+            <element signature="e#193#206#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/ServerSwitch.py">
+    <entry file="file://$PROJECT_DIR$/Backend/chatclient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1956">
-          <caret line="167" selection-start-line="167" selection-end-line="172" selection-end-column="17" />
+        <state relative-caret-position="504">
+          <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1560149871650" expanded="true" signature="317:533" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+          <folding>
+            <element signature="e#406#448#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/chatserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/ip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+          <folding>
+            <element signature="e#190#203#0" expanded="true" />
           </folding>
         </state>
       </provider>

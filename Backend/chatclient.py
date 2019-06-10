@@ -28,6 +28,7 @@ def check(HOST):
 
 def runChat():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind((host, PORT))
         sock.connect((host, PORT))
         t = Thread(target=rcvMsg, args=(sock,))
         t.daemon = True

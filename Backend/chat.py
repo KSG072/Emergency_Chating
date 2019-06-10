@@ -18,16 +18,18 @@ def rcvMsg(sock):
             data = sock.recv(1024)
             if not data:
                 break
-            print(data.decode())
+            Ui_MainWindow.receive_text(data)
 
         except:
             pass
 
+# def sendMsg(sock)
+
 def check(HOST):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 
-        sock.settimeout(1)
-        try: sock.connect((HOST, 9009))
+        sock.connect((HOST, 9009))
+        try: sock.close()
         except Exception as e:
             return False
         return True
@@ -40,13 +42,6 @@ def runChat():
         t = Thread(target=rcvMsg, args=(sock,))
         t.daemon = True
         t.start()
-
-        while True:
-            msg = input()
-            if msg == '/quit':
-                sock.send(msg.encode())
-                break
-            sock.send(msg.encode())
 
 
 class Ui_MainWindow(QtWidgets.QDialog):
@@ -85,7 +80,11 @@ class Ui_MainWindow(QtWidgets.QDialog):
     def send_text(self):
         text = self.send.toPlainText() #입력받은 텍스트
         self.chating.append("NickName" + " : " + text)   #DB에서 추출해서 할까..
+        socket.socket.send(text.encode())
         self.send.clear()
+
+    def receive_text(self,text):
+        self.chating.append("other" + " : " + text)
 
 
 

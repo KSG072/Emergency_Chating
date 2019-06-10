@@ -17,12 +17,15 @@ if platform.system() == 'Windows':
 else:
     from Backend import chat
 
+import Backend.login
+
 def check(HOST):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 
-        sock.settimeout(1)
+        sock.settimeout(3)
         try: sock.connect((HOST, 9009))
         except Exception as e:
+            print(e)
             return False
         return True
 
@@ -70,13 +73,13 @@ class Ui_MainWindow(QtWidgets.QDialog):
         msgbox = QtWidgets.QMessageBox(self)
         ip = self.lineEdit.text()
         self.lineEdit.clear()
-        if check(ip):
+        if not check(ip):
             msgbox.information(self, "알림", "맞지 않는 주소입니다.", QtWidgets.QMessageBox.Yes)
         else:
-            chat.host = ip
+            Backend.login.host = ip
             msgbox.information(self, "알림", "접속 성공", QtWidgets.QMessageBox.Yes)
             if platform.system() == 'Windows':
-                subprocess.run(['chat.py'], shell = True)
+                subprocess.run(['login.py'], shell = True)
             else:
                 subprocess.Popen(['python3', 'login.py'], cwd =os.path.dirname(os.path.realpath(__file__)))
             #여기다가 메세지박스 뜨게 만들어주세요
