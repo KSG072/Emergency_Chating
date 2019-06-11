@@ -32,8 +32,8 @@ class UserManager:
       del self.users[username]
       lock.release()
 
-      self.sendMessageToAll('[%s]님이 퇴장했습니다.' % username)#24번과 같은 방식으로 할 수 있으려나..
-      print('--- 대화 참여자 수 [%d]' % len(self.users))
+      self.sendMessageToAll('[%s]님이 퇴장했습니다.' %username)#24번과 같은 방식으로 할 수 있으려나..
+      print('--- 대화 참여자 수 [%d]' %len(self.users))
 
 
    def messageHandler(self, username, msg):#이제 나가기 버튼이 있는데 필요한 건가..
@@ -66,6 +66,7 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
        else:
            self.request.send('로그인실패'.encode())
            return False, ''
+
    def signup(self):
        id = self.request.recv(1024).decode()
        pw = self.request.recv(1024).decode()
@@ -85,8 +86,9 @@ class MyTcpHandler(socketserver.BaseRequestHandler):
                 logined, username = self.login()
            else:
                self.signup()
-       try:
            msg = self.request.recv(1024)
+           command = msg.decode()
+       try:
            while msg:
                Backend.database.add_chat(username, msg.decode())
                print(username, " : ", msg.decode())

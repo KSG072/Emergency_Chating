@@ -210,6 +210,7 @@ class Ui_MainWindow(QtWidgets.QDialog):
         if result == '로그인성공':
             msgbox.information(self, '알림', '로그인 되었습니다.', QtWidgets.QMessageBox.Yes)
             self.viewchange()
+            time.sleep(0.5)
             t = Thread(target=rcvMsg, args=(sock,))
             t.daemon = True
             t.start()
