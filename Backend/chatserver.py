@@ -25,6 +25,7 @@ class UserManager:
       return username
 
    def removeUser(self, username):
+
       if username not in self.users:
          return
 

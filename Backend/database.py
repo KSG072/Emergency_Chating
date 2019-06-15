@@ -8,7 +8,7 @@ def create_db():
     conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
     table_create_sql = """CREATE TABLE IF NOT EXISTS chat_log(
-    nickname VARCHAR(32) not null,
+    userid VARCHAR(32) not null,
     message text not null,
     ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"""
     cur.execute(table_create_sql)
@@ -16,7 +16,7 @@ def create_db():
 def add_chat(userid, message):
     conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
-    chat = "INSERT INTO chat_log(nickname, message, ts) values (?, ?, CURRENT_TIMESTAMP)"
+    chat = "INSERT INTO chat (userid, message, ts) values (?, ?, CURRENT_TIMESTAMP)"
     cur.execute(chat, (userid, message))
     conn.commit()
 
@@ -25,10 +25,10 @@ def list_chat(ts = None):
     conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
     if ts != None:
-        sql = "select * from chat_log where chat_log.ts >= ?"
+        sql = "select * from chat where chat_log.ts >= ?"
         cur.execute(sql, (ts,))
     else:
-        sql = "select * from chat_log where 1"
+        sql = "select * from chat where 1"
         cur.execute(sql)
         rows = cur.fetchall()
         for row in rows:
@@ -64,7 +64,7 @@ def list_chat_log():
     log = []
     conn = sqlite3.connect(chatfile)
     cur = conn.cursor()
-    sql = "select * from chat_log where 1"
+    sql = "select * from chat where 1"
     cur.execute(sql)
     rows = cur.fetchall()
     for row in rows:
